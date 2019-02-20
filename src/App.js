@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import { Route, Switch, NavLink } from 'react-router-dom'
 import Home from './components/home/Home'
-import Login from './components/accounts/Login'
+import Register from './components/accounts/Register'
 import firebase from 'firebase'
 
 class App extends Component {
@@ -32,6 +32,18 @@ class App extends Component {
       .catch(err=>console.log(err))
   }
 
+  loginEmail = (email, password) => {
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+      .then((user)=>{
+        console.log(user)
+        alert("Se ha registrado el usuario correctamente")
+      })
+      .catch((err)=>{
+        console.log(err)
+        alert("Ha ocurrido un eror al registrar")
+      })
+  }
+
   logout = () => {
     firebase.auth().signOut()
       .then(()=>alert("Se ha cerrado la sesión correctamente"))
@@ -45,12 +57,13 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route 
-            exact path="/login" 
+            exact path="/register" 
             render={()=> 
-            <Login 
+            <Register
               loginGoogle={this.loginGoogle}
               user={this.state.user}
               logout={this.logout}
+              loginEmail={this.loginEmail}
             />} 
           />
         </Switch>
