@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Input, Button, Icon } from 'antd'
 
 class Register extends Component {
     constructor(props){
@@ -29,47 +30,73 @@ class Register extends Component {
     }
 
     render(){
+        const suffix = this.state.correo ? <Icon type="close-circle" onClick={this.clearEmail} /> : null 
+        const { Password } = Input
         return (
             <div>
-            {this.props.user ?
-            <div>
-                <p>Nombre: {this.props.user.displayName}</p>
-                <p>Correo: {this.props.user.email}</p>
-                <img 
-                style={{width: "100px"}}
-                src={this.props.user.photoURL} 
-                alt={this.props.user.displayName} />
-                <button onClick={this.props.logout}>Cerrar sesión</button>
-            </div>    
-            : <button onClick={this.props.loginGoogle}>Inicia sesión con Google</button>
-            }
+            {/* DIV FORM */}    
             <div style={{
+                height: "50vh",
+                width: "50vw",
+                marginLeft: "25vw",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-around",
                 alignItems: "center"
             }}>
-            <input 
-            type="text" 
-            placeholder="Introduce tu correo"
-            onChange={(e)=>this.changeEmail(e)}
+            <p style={{
+                fontSize: "2em",
+                fontWeight: "700"
+            }}>
+                Regístrate
+            </p>
+            <Input 
+                prefix={<Icon type="user" style={{color: "#61B7C4"}} />}
+                suffix={suffix}
+                placeholder="Introduce tu correo"
+                onChange={(e)=>this.changeEmail(e)}
             />
 
-            <input 
-            type="password" 
+            <Password
             placeholder="Introduce tu contraseña"
             onChange={(e)=>this.changePassword(e)} 
             />
 
-            <input 
+            <Password
             type="password" 
             placeholder="Confirmar tu contraseña" 
             onChange={(e)=>this.changeConfirmPassword(e)}
             />
-            <button onClick={this.comparePasswords}>
-                Crear usuario
-            </button>
+            <Button 
+                style={{backgroundColor: "#61B7C4", color: "#fff"}}
+                shape="round" 
+                icon="user-add" 
+                size="small"
+                onClick={this.comparePasswords}
+                >
+                    Agregar usuario
+            </Button>
             </div>
+
+
+            {/*DIV GOOGLE*/ }
+            
+            <div style={{
+                width: "100%",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center"
+            }}>
+                <img 
+                style={{width: "100px", height: "100px", borderRadius: "50%"}}
+                src="https://pbs.twimg.com/profile_images/988272404915875840/lE7ZkrO-_400x400.jpg"
+                alt="Google Login"
+                onClick={this.props.loginGoogle}
+                />
+                <p>Iniciar sesión con Google</p>
+            </div>
+
             </div>
         )
     }

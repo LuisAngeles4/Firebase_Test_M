@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Route, Switch, NavLink } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
+import { Layout } from 'antd'
+import 'antd/dist/antd.css'
+import HeaderComponent from './components/common/Header'
+import FooterComponent from './components/common/Footer'
 import Home from './components/home/Home'
 import Register from './components/accounts/Register'
+
 import firebase from 'firebase'
 
 class App extends Component {
@@ -53,7 +58,9 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <Layout>
+        <HeaderComponent />
+        <div style={{height: "90vh"}}>
         <Switch>
           <Route exact path="/" component={Home} />
           <Route 
@@ -67,7 +74,9 @@ class App extends Component {
             />} 
           />
         </Switch>
-      </div>
+        </div>
+        <FooterComponent />
+      </Layout>
     );
   }
 }
