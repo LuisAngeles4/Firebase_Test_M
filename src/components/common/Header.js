@@ -9,7 +9,7 @@ const HeaderComponent = () => (
         <Menu
         theme="dark"
         mode="horizontal"
-        defaultSelectKey={["home"]}
+        defaultSelectedKeys={["home"]}
         style={{lineHeight: "64px", backgroundColor: "#61B7C4"}}
         >
             <Item key="home"><NavLink to="/">Inicio</NavLink></Item>

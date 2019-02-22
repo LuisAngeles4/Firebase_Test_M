@@ -7,6 +7,7 @@ import HeaderComponent from './components/common/Header'
 import FooterComponent from './components/common/Footer'
 import Home from './components/home/Home'
 import Register from './components/accounts/Register'
+import Login from './components/accounts/Login'
 
 import firebase from 'firebase'
 
@@ -28,6 +29,19 @@ class App extends Component {
         console.log("No estas logeado")
       }
     })
+  }
+
+  iniciarSesion = (e, email, password) => {
+    e.preventDefault();
+    firebase.auth().signInWithEmailAndPassword(email, password)
+      .then((user)=>{
+        alert("Usuario loggeado correctamente")
+        console.log(user)
+      })
+      .catch((err)=>{
+        alert("No se pudo loggear")
+        console.log(err)
+      })
   }
 
   loginGoogle = () => {
@@ -60,19 +74,29 @@ class App extends Component {
     return (
       <Layout>
         <HeaderComponent />
-        <div style={{height: "90vh"}}>
+        <div style={{height: "80vh"}}>
         <Switch>
+
           <Route exact path="/" component={Home} />
+
           <Route 
             exact path="/register" 
             render={()=> 
+
             <Register
               loginGoogle={this.loginGoogle}
               user={this.state.user}
               logout={this.logout}
               loginEmail={this.loginEmail}
             />} 
+
           />
+
+          <Route 
+            exact path="/login"
+            render={()=><Login iniciar={this.iniciarSesion} />}
+          />
+
         </Switch>
         </div>
         <FooterComponent />
