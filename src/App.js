@@ -73,7 +73,9 @@ class App extends Component {
   render() {
     return (
       <Layout>
-        <HeaderComponent />
+        <HeaderComponent 
+        user={this.state.user}
+        logout={this.logout}/>
         <div style={{height: "80vh"}}>
         <Switch>
 

@@ -55,7 +55,7 @@ class Login extends Component {
                 shape="round" 
                 icon="user-add" 
                 size="small"
-                onClick={(e)=>this.props.iniciar(e, this.state.correo, this.state.password)}
+                onClick={()=>this.props.iniciar(this.state.correo, this.state.password)}
                 >
                     Iniciar sesión
             </Button>
